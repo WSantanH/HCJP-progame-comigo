@@ -11,29 +11,25 @@
             margin: 0;
             min-height: 100vh;
             font-family: 'Fira Mono', monospace;
-            background: linear-gradient(135deg, #ffe082 0%, #2193b0 100%);
+            background: linear-gradient(135deg, #23272f 0%, #2193b0 100%);
             overflow-x: hidden;
             position: relative;
+            color: #e0e0e0;
         }
         .bubble {
             position: absolute;
             border-radius: 50%;
-            opacity: 0.6;
-            animation: float 12s infinite linear;
+            opacity: 0.18;
+            animation: float 16s linear infinite;
             z-index: 0;
+            pointer-events: none;
         }
-        .bubble.js {
-            background: #ffe082;
-            box-shadow: 0 0 24px #ffe08288;
-        }
-        .bubble.py {
-            background: #2193b0;
-            box-shadow: 0 0 24px #2193b088;
-        }
+        .bubble.js { background: #ffe082; }
+        .bubble.py { background: #2193b0; }
         @keyframes float {
-            0% { transform: translateY(100vh) scale(0.7); opacity: 0.6; }
-            50% { opacity: 0.9; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0.3; }
+            0% { transform: translateY(100vh) scale(0.7); opacity: 0.18; }
+            50% { opacity: 0.25; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0.08; }
         }
         header {
             text-align: center;
@@ -42,23 +38,23 @@
             z-index: 1;
             position: relative;
         }
-        h1, h2, h3, h4, h5, h6, nav a, ul li, p, .code-demo, label, .linguagem ul li, .dicas, .video-box, .code-demo code, .code-demo pre, .videos, .footer, .main, .code-demo *, .dicas *, .video-box * {
-            color: #23272f !important;
-            font-weight: bold !important;
-        }
         h1 {
             font-size: 2.5em;
-            color: #23272f;
+            color: #ffe082;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 8px #ffe08288;
+            text-shadow: 2px 2px 8px #2193b088;
             animation: typewriter 2s steps(20) 1s 1 normal both;
             overflow: hidden;
             white-space: nowrap;
-            border-right: 3px solid #23272f;
+            border-right: 3px solid #ffe082;
+        }
+        h2, h3, h4, h5, h6 {
+            color: #ffe082;
+            font-weight: bold;
+            text-shadow: 0 2px 8px #2193b088;
         }
         nav ul {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             gap: 32px;
             list-style: none;
@@ -67,38 +63,33 @@
             animation: fadeIn 1.5s;
         }
         nav a {
-            color: #23272f;
+            color: #ffe082;
             text-decoration: none;
             font-size: 1.2em;
             transition: color 0.3s;
+            font-weight: bold;
         }
         nav a:hover {
             color: #2193b0;
             text-shadow: 0 0 8px #ffe082;
         }
         main {
-            max-width: 900px;
-            margin: 40px auto;
-            background: rgba(255,255,255,0.7);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px #23272f22;
-            padding: 40px;
-            animation: fadeUp 1.2s;
+            max-width: 950px;
+            margin: 48px auto;
+            background: rgba(34, 39, 47, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #000a;
+            padding: 48px 32px;
             position: relative;
             z-index: 1;
-        }
-        h2 {
-            color: #2193b0;
-            font-size: 2.2em;
-            margin-bottom: 24px;
-            animation: fadeIn 2s;
+            animation: fadeUp 1.2s;
         }
         .linguagem {
             margin-bottom: 48px;
             animation: fadeUp 1.5s;
         }
         .linguagem h3 {
-            color: #23272f;
+            color: #ffe082;
             font-size: 1.7em;
             margin-bottom: 16px;
         }
@@ -111,42 +102,52 @@
             margin-bottom: 24px;
             font-size: 1.15em;
             line-height: 1.7;
-            color: #23272f;
-            background: #ffe08244;
+            color: #ffe082;
+            background: #ffe08222;
             border-radius: 8px;
             padding: 18px;
+            box-shadow: 0 2px 8px #ffe08244;
         }
-        .code-demo,
-        .code-demo pre,
-        .code-demo code,
-        .dicas pre,
-        .linguagem pre,
-        .linguagem code,
-        pre,
-        code {
-            background: #f7f7f7 !important;
-            color: #23272f !important;
-            font-weight: bold !important;
+        .code-demo, pre, code {
+            background: #23272f;
+            color: #ffe082;
             border-radius: 8px;
-            padding: 12px;
-            font-size: 1em;
+            padding: 18px;
+            font-size: 1.15em;
+            margin-top: 18px;
+            box-shadow: 0 2px 8px #2193b088;
+            animation: fadeIn 2s;
+            font-weight: bold;
             overflow-x: auto;
-            box-sizing: border-box;
-        }
-        .videos {
-            margin-top: 24px;
         }
         .video-box {
-            margin-bottom: 18px;
+            margin-bottom: 24px;
+            background: #23272f;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #2193b044;
+            padding: 12px;
         }
-        .video-box iframe {
+        .video-box b {
+            color: #ffe082;
+            font-size: 1.1em;
+        }
+        iframe {
             border-radius: 8px;
             width: 100%;
             max-width: 100%;
             height: 315px;
+            border: none;
+            box-shadow: 0 2px 8px #2193b044;
         }
-        section {
-            margin-bottom: 32px;
+        footer {
+            text-align: center;
+            padding: 24px 0;
+            color: #ffe082;
+            background: rgba(34,39,47,0.7);
+            font-size: 1.1em;
+            animation: fadeIn 2s;
+            border-radius: 0 0 18px 18px;
+            margin-top: 32px;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -164,20 +165,18 @@
             from { width: 0; }
             to { width: 100%; }
         }
-        /* Responsividade */
         @media (max-width: 900px) {
             main {
                 max-width: 98vw;
-                padding: 12vw 2vw;
+                padding: 8vw 2vw;
             }
+            iframe { height: 180px; }
         }
         @media (max-width: 600px) {
             h1 { font-size: 1.5em; }
             h2 { font-size: 1.2em; }
-            .linguagem h3 { font-size: 1.1em; }
-            main { padding: 8vw 2vw; }
+            main { padding: 4vw 2vw; }
             .code-demo, pre, code { font-size: 0.95em; }
-            .video-box iframe { height: 180px; }
             nav ul { gap: 12px; }
         }
     </style>
@@ -401,68 +400,6 @@ console.log(soma(2, 3));
                 </div>
             </div>
         </div>
-
-        <!-- NOVO BLOCO: Projetos Práticos -->
-        <section class="projetos">
-            <h3>Projetos Práticos para Treinar</h3>
-            <ul>
-                <li><b>Python:</b> Calculadora, sistema de cadastro, automação de planilhas, web scraping, API REST com Flask.</li>
-                <li><b>JavaScript:</b> Lista de tarefas, calculadora online, jogo da velha, consumo de API, página interativa com DOM.</li>
-                <li><b>Java:</b> Sistema de cadastro desktop, API REST com Spring Boot, CRUD com banco de dados, sistema de login.</li>
-            </ul>
-            <p>Esses projetos ajudam a fixar o conteúdo e podem ser usados no seu portfólio!</p>
-        </section>
-
-        <!-- NOVO BLOCO: Ferramentas e IDEs -->
-        <section class="ferramentas">
-            <h3>Ferramentas e IDEs Recomendadas</h3>
-            <ul>
-                <li><b>Python:</b> VS Code, PyCharm, Jupyter Notebook.</li>
-                <li><b>JavaScript:</b> VS Code, WebStorm, navegadores com DevTools.</li>
-                <li><b>Java:</b> IntelliJ IDEA, Eclipse, NetBeans.</li>
-            </ul>
-            <p>Utilize sempre um editor moderno para facilitar o desenvolvimento e depuração dos seus códigos.</p>
-        </section>
-
-        <!-- NOVO BLOCO: Comunidades e Recursos -->
-        <section class="comunidades">
-            <h3>Comunidades e Recursos Gratuitos</h3>
-            <ul>
-                <li><b>Python:</b> <a href="https://python.org" target="_blank">python.org</a>, <a href="https://pypi.org" target="_blank">PyPI</a>, <a href="https://www.youtube.com/@CursoemVideo" target="_blank">Curso em Vídeo</a></li>
-                <li><b>JavaScript:</b> <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript" target="_blank">MDN Web Docs</a>, <a href="https://www.youtube.com/@cfbcursos" target="_blank">CFBCursos</a></li>
-                <li><b>Java:</b> <a href="https://www.oracle.com/br/java/" target="_blank">Oracle Java</a>, <a href="https://www.youtube.com/@codigofontetv" target="_blank">Código Fonte TV</a></li>
-                <li><b>Geral:</b> <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a>, <a href="https://github.com/" target="_blank">GitHub</a></li>
-            </ul>
-            <p>Participe de fóruns, grupos e canais para tirar dúvidas, compartilhar conhecimento e fazer networking!</p>
-        </section>
-
-        <!-- NOVO BLOCO: Dicas de Carreira -->
-        <section class="carreira">
-            <h3>Dicas para sua Carreira em Tecnologia</h3>
-            <ul>
-                <li>Monte um portfólio com seus projetos.</li>
-                <li>Aprenda sobre controle de versão com Git e GitHub.</li>
-                <li>Faça cursos online e obtenha certificados.</li>
-                <li>Participe de eventos, hackathons e meetups.</li>
-                <li>Pratique inglês técnico para acessar mais conteúdos.</li>
-                <li>Busque estágio ou trabalho voluntário para ganhar experiência.</li>
-            </ul>
-            <p>O mercado de tecnologia está sempre em alta. Invista em aprendizado contínuo!</p>
-        </section>
-
-        <!-- NOVO BLOCO: Glossário -->
-        <section class="glossario">
-            <h3>Glossário Rápido</h3>
-            <ul>
-                <li><b>API:</b> Interface para integração entre sistemas.</li>
-                <li><b>Framework:</b> Conjunto de ferramentas para facilitar o desenvolvimento.</li>
-                <li><b>CRUD:</b> Operações de Criar, Ler, Atualizar e Deletar dados.</li>
-                <li><b>IDE:</b> Ambiente de desenvolvimento integrado.</li>
-                <li><b>Deploy:</b> Publicar um sistema na internet.</li>
-                <li><b>Front-end:</b> Parte visual do sistema (JavaScript).</li>
-                <li><b>Back-end:</b> Parte lógica e de dados (Python, Java).</li>
-            </ul>
-        </section>
     </main>
     <footer>
         <p>&copy; 2023 VIP Java & Python. Todos os direitos reservados.</p>
