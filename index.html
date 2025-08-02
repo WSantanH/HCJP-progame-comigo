@@ -6,102 +6,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
     <style>
-        /* Melhor responsividade para modal e botões */
-        @media (max-width: 600px) {
-            #pixModal > div {
-                width: 98vw !important;
-                max-width: 98vw !important;
-                padding: 16px 6px !important;
-            }
-            #pixCode {
-                font-size: 0.95em !important;
-                height: 60px !important;
-            }
-            #copyPix, #pixModal button {
-                font-size: 1em !important;
-                padding: 8px !important;
-            }
+        body {
+            font-family: 'Fira Mono', monospace;
+            background: linear-gradient(135deg, #23272f 0%, #2193b0 100%);
+            margin: 0;
+            color: #e0e0e0;
+            min-height: 100vh;
         }
-        /* Garantir que o modal fique centralizado em todos dispositivos */
-        #pixModal {
-            display: none;
+        .perfil-foto-topo {
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
+            top: 16px;
+            right: 16px;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
-        #pixModal.show {
-            display: flex !important;
+        .perfil-foto {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2193b0;
+            box-shadow: 0 2px 8px #23272f44;
+            background: #fff;
+            display: block;
         }
-        /* Corrige textarea para todos dispositivos */
-        #pixCode {
-            width: 100%;
-            min-height: 60px;
+        .glass {
+            background: #1a1d23ee;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px #000a;
+            padding: 32px;
+            margin: 32px auto;
+            max-width: 900px;
+            color: #e0e0e0;
+            text-align: left;
+            border: 1px solid #2193b0;
+            position: relative;
+            z-index: 1;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffe082;
+            font-family: 'Fira Mono', monospace;
+            font-weight: bold;
+            text-shadow: 0 2px 8px #2193b088;
+        }
+        button {
+            background: #2193b0;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-size: 1em;
+            font-family: 'Fira Mono', monospace;
+            cursor: pointer;
+            margin: 8px 0;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #176fa1;
+        }
+        pre, code {
+            background: #23272f;
+            color: #ffe082;
+            font-family: 'Fira Mono', monospace;
             font-size: 1em;
             border-radius: 8px;
-            padding: 8px;
-            resize: none;
-            box-sizing: border-box;
+            padding: 12px;
+            margin: 12px 0;
+            overflow-x: auto;
+            box-shadow: 0 2px 8px #2193b044;
         }
-        /* Botões responsivos */
-        button {
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-        /* Imagens responsivas */
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        /* Tabelas responsivas */
         table {
             width: 100%;
             border-collapse: collapse;
-            overflow-x: auto;
-            display: block;
+            background: #23272f;
+            color: #ffe082;
+            margin: 16px 0;
         }
         th, td {
-            padding: 6px 8px;
-            border: 1px solid #ccc;
+            border: 1px solid #2193b0;
+            padding: 8px;
+            text-align: left;
         }
-        /* Corrige fonte para todos dispositivos */
-        body {
-            font-family: 'Fira Mono', monospace;
-            background: #f7f7f7;
-            margin: 0;
-            color: #23272f;
+        th {
+            background: #2193b0;
+            color: #fff;
+        }
+        .code-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(135deg, #23272f 0px, #23272f 2px, #2193b0 4px, #23272f 8px);
+            opacity: 0.07;
+        }
+        /* Bolhas animadas */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.18;
+            z-index: 0;
+            animation: floatBubble 16s linear infinite;
+            pointer-events: none;
+        }
+        .bubble1 { background: #2193b0; width: 120px; height: 120px; left: 5vw; top: 80vh; animation-delay: 0s;}
+        .bubble2 { background: #176fa1; width: 80px; height: 80px; left: 70vw; top: 90vh; animation-delay: 3s;}
+        .bubble3 { background: #ffe082; width: 60px; height: 60px; left: 40vw; top: 95vh; animation-delay: 6s;}
+        .bubble4 { background: #23272f; width: 100px; height: 100px; left: 20vw; top: 85vh; animation-delay: 9s;}
+        .bubble5 { background: #fff; width: 90px; height: 90px; left: 80vw; top: 98vh; animation-delay: 12s;}
+        @keyframes floatBubble {
+            0% { transform: translateY(0) scale(0.8); opacity: 0.18; }
+            50% { opacity: 0.25; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0.08; }
+        }
+        @media (max-width: 600px) {
+            .glass { padding: 4vw 2vw; }
+            .perfil-foto { width: 32px; height: 32px; }
+            .perfil-foto-topo { top: 8px; right: 8px; }
+            table, th, td { font-size: 0.95em; }
         }
     </style>
 </head>
 <body>
     <div class="code-bg"></div>
-    <div id="info-numero">
+    <!-- Bolhas animadas -->
+    <div class="bubble bubble1"></div>
+    <div class="bubble bubble2"></div>
+    <div class="bubble bubble3"></div>
+    <div class="bubble bubble4"></div>
+    <div class="bubble bubble5"></div>
+
+    <!-- Foto do usuário no canto superior direito -->
+    <div class="perfil-foto-topo" style="display:flex;flex-direction:column;align-items:center;">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de perfil" class="perfil-foto" id="fotoPerfil">
+        <input type="file" id="inputFoto" accept="image/*" style="display:none" />
+        <button id="trocarFotoBtn" style="margin-top:6px; background:#ffe082; color:#23272f; border:none; border-radius:8px; padding:6px 16px; font-size:0.95em; cursor:pointer;">Trocar foto</button>
+        <button id="logoutBtn" style="margin-top:6px; background:#2193b0; color:#fff; border:none; border-radius:8px; padding:6px 16px; font-size:0.95em; cursor:pointer;">Deslogar</button>
+    </div>
+
+    <div id="info-numero" style="margin:16px;">
         Para mais informações disque <b>75-9716-3401</b>.
     </div>
     <div style="position:fixed;top:60px;left:16px;z-index:1100;">
         <button id="btnLoja">
-            Loja VIP - Pacote Python & JavaScript (R$ 10,00)
+            Loja VIP - Pacote Python & JavaScript (R$ 80,00)
         </button>
-    </div>
-
-    <div class="perfil-container">
-        <div class="perfil-foto-bg">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de perfil" class="perfil-foto" id="fotoPerfil">
-            <span class="icon-code">&#60;/&#62;</span>
+        <!-- Sistema de compra dentro do botão Loja VIP -->
+        <div id="pixModal" style="display:none;position:absolute;top:50px;left:0;max-width:340px;width:100%;background:#23272f;border-radius:12px;box-shadow:0 4px 24px #000a;padding:24px;z-index:1201;">
+            <h3 style="margin-top:0;color:#ffe082;">Pix Copia e Cola (Banco Inter)</h3>
+            <p id="pixMsg" style="color:#ffe082;font-size:1em;margin-bottom:8px;">
+                Para comprar, copie o código abaixo, pague via Pix Copia e Cola no seu app do Banco Inter e clique em "Confirmar compra".
+            </p>
+            <textarea id="pixCode" readonly style="width:100%;height:80px;">
+00020101021126580014br.gov.bcb.pix0136ac2d3760-ff82-406f-ad66-420fcd0872df520400005303986540510.005802BR5921WAYLLAHN S DOS SANTOS6006BANZAE62070503***6304F1CF
+            </textarea>
+            <button id="copyPix" style="margin-top:8px;">Copiar código</button>
+            <button id="confirmCompra" style="margin-top:8px;">Confirmar compra</button>
+            <div id="compraStatus" style="margin-top:10px;font-size:1em;color:#ffe082;display:none;"></div>
+            <button id="btnFecharModal" style="margin-top:8px;background:#ffe082;color:#23272f;border-radius:8px;">Fechar</button>
         </div>
-        <input type="file" id="inputFoto" accept="image/*" style="display:none" />
-        <button id="trocarFotoBtn">Trocar foto</button>
-        <button class="logout-btn" id="logoutBtn" onclick="deslogar()">Deslogar</button>
     </div>
 
     <div class="glass">
-        <h1 class="typewriter">Fundamentos do HTML</h1>
-        <h3 class="typewriter" style="animation-delay:2.5s;">Aprendam comigo e cresçam juntos!</h3>
+        <h1>Fundamentos do HTML</h1>
+        <h3>Aprendam comigo e cresçam juntos!</h3>
         <button onclick="mostrarCadastro()">Cadastro</button>
         <button onclick="mostrarLogin()">Login</button>
         <div id="cadastro" class="glass" style="display:none;">
@@ -132,31 +202,23 @@
         <hr>
         <!-- este é um comentário -->
         <p>Agora temos o comentário, ele é utilizado para adicionar notas.</p>
-        <!-- 2 - atributos -->
         <hr>
         <a href="https://www.google.com">Acesse o Google</a>
-        <!-- 3 - atributos -->
         <p>A tag href é usada para por links no seu site.</p>
-        <!-- 4 - abrir aba com link -->
         <a href="http://www.google.com" target="_blank">Abrir Google em nova aba</a>
-        <!-- 5 - inserir imagem -->
         <img src="img/stable-diffusion-imagem.jpg" alt="" style="width:200px; border-radius:8px; margin:10px 0;">
         <p>Como você pode ver usamos a tag img, que é usada para adicionar imagens ao seu site.</p>
-        <!-- 6 - atributo alt -->
         <img src="img/images.jfif" alt="flores" style="width:200px; border-radius:8px; margin:10px 0;">
         <p>Como podemos ver, é possível usar o atributo alt na imagem, que serve como leitor do google.</p>
-        <!-- 7 - listas não ordenadas-->
         <ul>
             <li>carros</li>
             <li>motos</li>
         </ul>
         <p>Como podemos ver, podemos usar as listas não ordenadas para listar e deixar em destaque.</p>
-        <!-- 8 - listas ordenadas -->
         <ol>
             <li>listas ordenadas</li>
         </ol>
         <p>Como podemos ver, as listas ordenadas são usadas para colocar não um ponto ou seja tópico, mas sim em números.</p>
-        <!-- 9 - tabelas -->
         <table>
             <tr>
                 <th>ID:</th>
@@ -170,221 +232,289 @@
             </tr>
         </table>
         <p>Como você pode ver é possível utilizar a tag table, que serve para tabela e também th e td.</p>
-        <!-- 10 - tag div -->
         <div>
             <h2>Div, o que é?</h2>
         </div>
         <p>A tag div é usada para dividir.</p>
-        <!-- 12 - div -->
         <div>
             <h2>A tag é muito utilizada para estruturar visualmente o conteúdo das páginas web.</h2>
             <p>A tag no HTML é usada para criar divisões ou seções em uma página. Ela não tem significado semântico, mas serve para agrupar elementos e facilitar a organização do layout, principalmente quando você quer aplicar estilos com CSS ou manipular partes do site com JavaScript.</p>
             <a href="https://www.w3schools.com/html/html_div.asp" target="_blank">Para mais informações sobre, acesse o site.</a> 
-            
             <h1>Maneiras de utilizar e/ou adicionar css</h1>
             <p>Temos maneiras de utilizar o css ao html.</p>
-            <ol id="lista" class="lista-ordenada"></ol>
-            <li>Pelo inline: quando os estilos são adicionados por um atributo;</li> 
-            <li>Pelo internal: quando o CSS é adicionado na tag head;</li>
-            <li>Pelo external: quado o css é adicionado através de um arquivo externo, e depois importado no HTMl;</li>
-            <H1>Qual vamos escolher?</H1>
-            <p>Vamos optar  sempre pelo external CSS, quando houver a opção.</p>
+            <ul>
+                <li>Pelo inline: quando os estilos são adicionados por um atributo;</li> 
+                <li>Pelo internal: quando o CSS é adicionado na tag head;</li>
+                <li>Pelo external: quado o css é adicionado através de um arquivo externo, e depois importado no HTMl;</li>
+            </ul>
+            <h1>Qual vamos escolher?</h1>
+            <p>Vamos optar sempre pelo external CSS, quando houver a opção.</p>
             <h1>A anatomia do CSS</h1>
-            <p>Com CSS aplicando CSS a um elemento. Primeiramente devemos selecionar o elemento, isso pode ser feito através da tag do elemento. Depois precisamos colocar as propriedades e os valores, se quisermos mudar a cor de algo utilizamos: color: red, nome da propriedade, dois pontos, valor, ponto e vírgula.</p>
+            <p>Com CSS aplicando CSS a um elemento. Primeiramente devemos selecionar o elemento, isso pode ser feito através da tag do elemento. Depois precisamos colocar as propriedades e os valores, se quisermos mudar a cor de algo utilizamos: color: red, nome da propriedade, dois pontos, valor, ponto e vírgula.</p>
             <h1>Inline CSS</h1>
-            <p>O inline CSS é quando você aplica estilos diretamente em um elemento HTML usando o atributo style, mas pode ser utilizado sem selecionar o elemento, pois é uma tributo diretamente inserido no mesmo.</p>
+            <p>O inline CSS é quando você aplica estilos diretamente em um elemento HTML usando o atributo style, mas pode ser utilizado sem selecionar o elemento, pois é um atributo diretamente inserido no mesmo.</p>
             <p>Ele nos permite:</p> 
-            <li>Aplicar estilos específicos a um único elemento;</li>
-            <li>Sobrepor estilos definidos em folhas de estilo externas ou internas;</li>
-            <li>Ser útil para testes rápidos ou ajustes pontuais;</li>
+            <ul>
+                <li>Aplicar estilos específicos a um único elemento;</li>
+                <li>Sobrepor estilos definidos em folhas de estilo externas ou internas;</li>
+                <li>Ser útil para testes rápidos ou ajustes pontuais;</li>
+            </ul>
             <p>Porém, o inline CSS não é recomendado para uso extensivo, pois pode tornar o código HTML desorganizado e difícil de manter. É melhor usar folhas de estilo externas ou internas para aplicar estilos de forma consistente em todo o site.</p>
             <h1>Internal CSS</h1>
             <p>O CSS interno é uma técnica melhor que o inline, vamos colocar todos os estilos na tag head;</p>
-            <li>As regras precisam também estar entre a tag style;</li>
-            <li>E através desta maneira, é necessário selecionar o elmento alvo: p{ color: red;}
+            <ul>
+                <li>As regras precisam também estar entre a tag style;</li>
+                <li>E através desta maneira, é necessário selecionar o elemento alvo: p{ color: red; }</li>
+            </ul>
             <h1>External CSS</h1>
-            <p>Para adicionar CSS com esta técnica precisamos criar um arquivo . css;</p>
-            <li>Geralmente eles ficam numa pasta chamada css;</li>
-            <li>E nós o importamos através da tag link;</li>
-            <li>O link deve estar dentro da tag head;</li>
-            <li>O link deve ter o atributo rel com o valor stylesheet e as regras que estão no arquivo são aplicadas no HTML.</li>
+            <p>Para adicionar CSS com esta técnica precisamos criar um arquivo .css;</p>
+            <ul>
+                <li>Geralmente eles ficam numa pasta chamada css;</li>
+                <li>E nós o importamos através da tag link;</li>
+                <li>O link deve estar dentro da tag head;</li>
+                <li>O link deve ter o atributo rel com o valor stylesheet e as regras que estão no arquivo são aplicadas no HTML.</li>
+            </ul>
             <h1>Múltiplos arquivos CSS</h1>
             <p>É possível ter múltiplos arquivos CSS em um projeto. Para isso, basta criar vários arquivos .css e importá-los na tag head do HTML.</p>
             <p>Por exemplo, você pode ter um arquivo style.css para estilos gerais, outro chamado titles.css para estilos de títulos, e assim por diante.</p>
-            <p>Isso ajuda a organizar melhor o código e facilita a manutenção, especialmente em projetos
+            <p>Isso ajuda a organizar melhor o código e facilita a manutenção, especialmente em projetos grandes.</p>
             <h1>Comentários no CSS</h1>
-            <li>Comentários do CSS são como os de HTML, utilizamos para descrever algo no código;</li>
-            <li>Caso o código precise de explicações adicionais, podemos usar comentários para esclarecer;</li>
-            <li>A sintaxe é: /* algum comentário */, isso caso o código seja inspencionado, aí os comentários serão exibidos</li>
+            <ul>
+                <li>Comentários do CSS são como os de HTML, utilizamos para descrever algo no código;</li>
+                <li>Caso o código precise de explicações adicionais, podemos usar comentários para esclarecer;</li>
+                <li>A sintaxe é: /* algum comentário */, isso caso o código seja inspecionado, aí os comentários serão exibidos</li>
+            </ul>
             <h1>Classes e ids</h1>
-            <li>Classes e ids são seletores que nos permitem aplicar estilos a elementos específicos;</li>
-            <li>Um id deve ser único dentro de uma página, enquanto várias classes podem ser aplicadas a um ou mais elementos;</li>
-            <li>A sintaxe para usar um id é: #meuId { color: red; }, e para uma classe: .minhaClasse { color: blue; };</li>
+            <ul>
+                <li>Classes e ids são seletores que nos permitem aplicar estilos a elementos específicos;</li>
+                <li>Um id deve ser único dentro de uma página, enquanto várias classes podem ser aplicadas a um ou mais elementos;</li>
+                <li>A sintaxe para usar um id é: #meuId { color: red; }, e para uma classe: .minhaClasse { color: blue; };</li>
+            </ul>
             <p>Classes e ids são fundamentais para aplicar estilos específicos a elementos HTML. Eles nos permitem personalizar a aparência de partes específicas do site, tornando o design mais flexível e organizado.</p>
             <h1>Classes</h1>
             <p>As classes são usadas para agrupar elementos que compartilham estilos semelhantes. Você pode aplicar a mesma classe a vários elementos, facilitando a manutenção e a consistência do design.</p>
             <p>Para usar uma classe, você a define no CSS com um ponto (.) antes do nome da classe. Por exemplo:</p>
             <pre><code>.minhaClasse {
-                color: blue;
-            }</code></pre>
+    color: blue;
+}</code></pre>
             <p>Em seguida, você aplica a classe aos elementos HTML usando o atributo class:</p>
             <pre><code>&lt;div class="minhaClasse"&gt;Este é um exemplo de div com classe.&lt;/div&gt;</code></pre>
             <p>Você pode aplicar várias classes a um único elemento, separando os nomes por espaços:</p>
             <pre><code>&lt;div class="classe1 classe2"&gt;Este é um exemplo de div com múltiplas classes.&lt;/div&gt;</code></pre>
             <h1>Ids</h1>
-    color: blue;
+            <p>Os ids são usados para identificar elementos únicos na página. Para usar um id, defina no CSS com # antes do nome:</p>
+            <pre><code>#meuId {
+    color: red;
+}</code></pre>
+            <p>E aplique ao elemento HTML:</p>
+            <pre><code>&lt;div id="meuId"&gt;Este é um exemplo de div com id.&lt;/div&gt;</code></pre>
         </div>
     </div>
 
-    <div id="pixModal">
-        <div>
-            <h3 style="margin-top:0;">Pix Copia e Cola</h3>
-            <p id="pixMsg" style="color:#ffe082;font-size:1em;margin-bottom:8px;">
-                Para comprar, copie o código abaixo, pague via Pix Copia e Cola no seu banco e clique em "Confirmar compra".
-            </p>
-            <textarea id="pixCode" readonly>
-00020101021126580014br.gov.bcb.pix0136ac2d3760-ff82-406f-ad66-420fcd0872df520400005303986540510.005802BR5921WAYLLAHN S DOS SANTOS6006BANZAE62070503***6304F1CF
-</textarea>
-            <button id="copyPix">Copiar código</button>
-            <button id="confirmCompra">Confirmar compra</button>
-            <div id="compraStatus" style="margin-top:10px;font-size:1em;color:#ffe082;display:none;"></div>
-            <button onclick="document.getElementById('pixModal').classList.remove('show')" style="margin-top:8px;">Fechar</button>
-            <button id="btnEntrarSite" style="margin-top:12px;display:none;">Entre no site Java e Python</button>
+    <div class="glass">
+        <h2 style="margin-top:0;">Vídeos para aprender HTML e CSS</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;">
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>HTML para Iniciantes</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/3oSIqIqzN3M" title="HTML para Iniciantes - Curso Completo" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>Curso Completo de HTML5</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/epDCjksKMok" title="Curso Completo de HTML5 - Curso em Vídeo" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>HTML e CSS do Zero</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/4AfRAVcThyA" title="HTML e CSS do Zero - Node Studio" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <!-- Vídeo CSS para Iniciantes corrigido -->
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>CSS para Iniciantes</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/BKATrAAWrRo" title="CSS para Iniciantes" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>Curso Completo de CSS3</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/GykTLqODQuU" title="Curso Completo de CSS3" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>HTML e CSS na Prática</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/n_Etdr7Dbjs" title="HTML e CSS na Prática" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>Como Criar Sites Responsivos</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/H91DhKPjhPk" title="Como Criar Sites Responsivos" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>HTML e CSS para Iniciantes</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/w7sIMxxVELs" title="HTML e CSS para Iniciantes" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div style="flex:1 1 320px;max-width:400px;">
+                <h4>Como usar Flexbox no CSS</h4>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/JJSoEo8JSnc" title="Como usar Flexbox no CSS" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const btnLoja = document.getElementById('btnLoja');
-        const pixModal = document.getElementById('pixModal');
-        const copyPix = document.getElementById('copyPix');
-        const pixCode = document.getElementById('pixCode');
-        const confirmCompra = document.getElementById('confirmCompra');
-        const btnEntrarSite = document.getElementById('btnEntrarSite');
-        const compraStatus = document.getElementById('compraStatus');
-        const btnCadastro = document.querySelector('button[onclick="mostrarCadastro()"]');
-        const btnLogin = document.querySelector('button[onclick="mostrarLogin()"]');
-        const logoutBtn = document.getElementById('logoutBtn');
-
-        // Abre modal Pix ao clicar em comprar
-        if (btnLoja) {
-            btnLoja.onclick = function() {
-                pixModal.classList.add('show');
-                btnEntrarSite.style.display = 'none';
-                confirmCompra.style.display = '';
-                compraStatus.style.display = 'none';
-                compraStatus.innerText = '';
-                document.getElementById('pixMsg').style.display = '';
-            };
+document.addEventListener('DOMContentLoaded', function() {
+    // Atualiza a foto do perfil ao carregar a página
+    const fotoPerfil = document.getElementById('fotoPerfil');
+    const email = localStorage.getItem('usuarioLogado');
+    let foto = "https://randomuser.me/api/portraits/men/32.jpg";
+    if (email) {
+        const fotoSalva = localStorage.getItem('fotoPerfil_' + email);
+        if (fotoSalva) {
+            foto = fotoSalva;
         }
+    }
+    if (fotoPerfil) fotoPerfil.src = foto;
 
-        // Copiar código Pix
-        if (copyPix && pixCode) {
-            copyPix.onclick = function() {
-                pixCode.select();
-                document.execCommand('copy');
-                copyPix.innerText = "Copiado!";
-                setTimeout(() => { copyPix.innerText = "Copiar código"; }, 1500);
-            };
-        }
+    // Botões de cadastro e login
+    const btnCadastro = document.querySelector('button[onclick="mostrarCadastro()"]');
+    const btnLogin = document.querySelector('button[onclick="mostrarLogin()"]');
+    const divCadastro = document.getElementById('cadastro');
+    const divLogin = document.getElementById('login');
 
-        // Confirmar compra (simulação de verificação)
-        if (confirmCompra) {
-            confirmCompra.onclick = function() {
-                let pagou = confirm("Você já realizou o pagamento via Pix Copia e Cola?");
-                if (pagou) {
-                    localStorage.setItem('acessoComprado', 'true');
-                    confirmCompra.style.display = 'none';
-                    btnEntrarSite.style.display = '';
-                    compraStatus.style.display = 'block';
-                    compraStatus.innerText = "Compra concluída! Agora você pode acessar o site Java e Python.";
-                    document.getElementById('pixMsg').style.display = 'none';
-                } else {
-                    compraStatus.style.display = 'block';
-                    compraStatus.innerText = "Não foi possível concluir a compra. Realize o pagamento Pix antes de confirmar!";
-                }
-            };
-        }
+    // Função para esconder/mostrar botões
+    function esconderBotoes() {
+        if (btnCadastro) btnCadastro.style.display = 'none';
+        if (btnLogin) btnLogin.style.display = 'none';
+    }
+    function mostrarBotoes() {
+        if (btnCadastro) btnCadastro.style.display = '';
+        if (btnLogin) btnLogin.style.display = '';
+    }
 
-        // Botão para entrar no site Java e Python
-        if (btnEntrarSite) {
-            btnEntrarSite.onclick = function() {
-                window.location.href = "inde2.html";
-            };
-        }
+    // Mostrar cadastro
+    window.mostrarCadastro = function() {
+        divCadastro.style.display = '';
+        divLogin.style.display = 'none';
+    };
 
-        // Bloqueia acesso se não comprou
-        if (window.location.pathname.endsWith('inde2.html')) {
-            if (localStorage.getItem('acessoComprado') !== 'true') {
-                alert('Você precisa comprar para acessar esta página!');
-                window.location.href = 'index.html';
-            }
-        }
+    // Mostrar login
+    window.mostrarLogin = function() {
+        divLogin.style.display = '';
+        divCadastro.style.display = 'none';
+    };
 
-        // Atualiza foto do perfil ao carregar a página
-        const fotoPerfil = document.getElementById('fotoPerfil');
-        const email = localStorage.getItem('usuarioLogado');
-        let foto = "https://randomuser.me/api/portraits/men/32.jpg";
-        if (email) {
-            const fotoSalva = localStorage.getItem('fotoPerfil_' + email);
-            if (fotoSalva) {
-                foto = fotoSalva;
-            }
-        }
-        if (fotoPerfil) fotoPerfil.src = foto;
-
-        // Esconde/mostra botões de login/cadastro conforme login
-        function esconderBotoes() {
-            if (btnCadastro) btnCadastro.style.display = 'none';
-            if (btnLogin) btnLogin.style.display = 'none';
-        }
-        function mostrarBotoes() {
-            if (btnCadastro) btnCadastro.style.display = '';
-            if (btnLogin) btnLogin.style.display = '';
-        }
-
-        // Verifica login ao carregar
-        if (localStorage.getItem('usuarioLogado')) {
+    // Função de cadastro
+    window.cadastrar = function(event) {
+        event.preventDefault();
+        const emailInput = event.target.querySelector('input[type="email"]');
+        if (emailInput && emailInput.value) {
+            localStorage.setItem('usuarioLogado', emailInput.value);
+            divCadastro.style.display = 'none';
             esconderBotoes();
-        } else {
-            mostrarBotoes();
+            alert('Cadastro realizado com sucesso!');
         }
+        return false;
+    };
 
-        // Função de login
-        window.entrar = function(event) {
-            event.preventDefault();
-            const emailInput = event.target.querySelector('input[type="email"]');
-            if (emailInput) {
-                localStorage.setItem('usuarioLogado', emailInput.value);
-                esconderBotoes();
-                document.getElementById('login').style.display = 'none';
-            }
-            return false;
-        };
+    // Função de login
+    window.entrar = function(event) {
+        event.preventDefault();
+        const emailInput = event.target.querySelector('input[type="email"]');
+        if (emailInput && emailInput.value) {
+            localStorage.setItem('usuarioLogado', emailInput.value);
+            divLogin.style.display = 'none';
+            esconderBotoes();
+            alert('Login realizado com sucesso!');
+        }
+        return false;
+    };
 
-        // Função de cadastro
-        window.cadastrar = function(event) {
-            event.preventDefault();
-            const emailInput = event.target.querySelector('input[type="email"]');
-            if (emailInput) {
-                localStorage.setItem('usuarioLogado', emailInput.value);
-                esconderBotoes();
-                document.getElementById('cadastro').style.display = 'none';
-            }
-            return false;
-        };
-
-        // Função de deslogar
-        window.deslogar = function() {
+    // Função de logout
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
             localStorage.removeItem('usuarioLogado');
+            fotoPerfil.src = "https://randomuser.me/api/portraits/men/32.jpg";
             mostrarBotoes();
-        };
+            alert('Logout realizado com sucesso!');
+        });
+    }
 
-        // Botão deslogar
-        if (logoutBtn) {
-            logoutBtn.onclick = window.deslogar;
-        }
-    });
+    // Trocar foto do perfil
+    const trocarFotoBtn = document.getElementById('trocarFotoBtn');
+    const inputFoto = document.getElementById('inputFoto');
+    if (trocarFotoBtn && inputFoto && fotoPerfil) {
+        trocarFotoBtn.onclick = function() {
+            inputFoto.click();
+        };
+        inputFoto.onchange = function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    fotoPerfil.src = ev.target.result;
+                    const email = localStorage.getItem('usuarioLogado');
+                    if (email) {
+                        localStorage.setItem('fotoPerfil_' + email, ev.target.result);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+    }
+
+    // Ao carregar, verifica login
+    if (localStorage.getItem('usuarioLogado')) {
+        esconderBotoes();
+    } else {
+        mostrarBotoes();
+    }
+
+    const btnLoja = document.getElementById('btnLoja');
+    const pixModal = document.getElementById('pixModal');
+    const copyPix = document.getElementById('copyPix');
+    const pixCode = document.getElementById('pixCode');
+    const confirmCompra = document.getElementById('confirmCompra');
+    const compraStatus = document.getElementById('compraStatus');
+
+    // Abre modal Pix ao clicar em comprar
+    if (btnLoja) {
+        btnLoja.onclick = function() {
+            pixModal.style.display = 'block';
+            compraStatus.style.display = 'none';
+            compraStatus.innerText = '';
+            document.getElementById('pixMsg').style.display = '';
+        };
+    }
+
+    // Copiar código Pix
+    if (copyPix && pixCode) {
+        copyPix.onclick = function() {
+            pixCode.select();
+            document.execCommand('copy');
+            copyPix.innerText = "Copiado!";
+            setTimeout(() => { copyPix.innerText = "Copiar código"; }, 1500);
+        };
+    }
+
+    // Confirmar compra (simulação de verificação)
+    if (confirmCompra) {
+        confirmCompra.onclick = function() {
+            let pagou = confirm("Você já realizou o pagamento via Pix Copia e Cola no Banco Inter?");
+            if (pagou) {
+                localStorage.setItem('acessoComprado', 'true');
+                compraStatus.style.display = 'block';
+                compraStatus.innerText = "Compra concluída! Redirecionando...";
+                setTimeout(function() {
+                    window.location.href = "inde2.html";
+                }, 1500);
+            } else {
+                compraStatus.style.display = 'block';
+                compraStatus.innerText = "Não foi possível concluir a compra. Realize o pagamento Pix antes de confirmar!";
+            }
+        };
+    }
+
+    const btnFecharModal = document.getElementById('btnFecharModal');
+    if (btnFecharModal && pixModal) {
+        btnFecharModal.onclick = function() {
+            pixModal.style.display = 'none';
+        };
+    }
+});
     </script>
 </body>
 </html>

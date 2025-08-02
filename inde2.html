@@ -404,5 +404,16 @@ console.log(soma(2, 3));
     <footer>
         <p>&copy; 2023 VIP Java & Python. Todos os direitos reservados.</p>
     </footer>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contatoBtn = document.querySelector('nav a[href="#contato"]');
+    if (contatoBtn) {
+        contatoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Contato: 75 9716 3401');
+        });
+    }
+});
+    </script>
 </body>
 </html>
