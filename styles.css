@@ -151,34 +151,75 @@ img {
 @media (max-width: 900px) {
     .glass {
         max-width: 98vw;
-        padding: 8vw 2vw;
-    }
-    table, th, td { font-size: 0.95em; }
-}
-@media (max-width: 600px) {
-    h1 { font-size: 1.5em; }
-    h2 { font-size: 1.2em; }
-    .glass { padding: 4vw 2vw; }
-    pre, code { font-size: 0.95em; }
-    .perfil-container {
-        gap: 8px;
-        margin: 16px 0;
-    }
-    .perfil-foto {
-        width: 32px;
-        height: 32px;
-    }
-    .icon-code {
-        font-size: 0.8em;
-        padding: 1px 4px;
+        margin: 16px 1vw;
+        padding: 4vw 2vw;
     }
     .perfil-foto-topo {
         top: 8px;
         right: 8px;
     }
+    .perfil-foto {
+        width: 32px;
+        height: 32px;
+    }
     #trocarFotoBtn, #logoutBtn {
         font-size: 0.85em;
         max-width: 90px;
         padding: 4px 8px;
+    }
+    .bubble1, .bubble2, .bubble3, .bubble4, .bubble5 {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    #pixModal {
+        left: 0 !important;
+        right: 0 !important;
+        max-width: 98vw !important;
+        width: 98vw !important;
+        padding: 12px !important;
+        font-size: 0.95em;
+    }
+    #pixCode {
+        font-size: 0.95em;
+        height: 60px !important;
+    }
+    .glass iframe {
+        height: 180px !important;
+    }
+    .glass h2, .glass h4 {
+        font-size: 1.1em;
+    }
+    .glass table, .glass th, .glass td {
+        font-size: 0.95em;
+    }
+}
+@media (max-width: 600px) {
+    .glass {
+        padding: 2vw 1vw;
+        margin: 8px 0;
+    }
+    .perfil-foto-topo {
+        top: 4px;
+        right: 4px;
+    }
+    .perfil-foto {
+        width: 24px;
+        height: 24px;
+    }
+    #trocarFotoBtn, #logoutBtn {
+        font-size: 0.75em;
+        max-width: 70px;
+        padding: 2px 4px;
+    }
+    #pixModal {
+        padding: 6px !important;
+        font-size: 0.9em;
+    }
+    .glass iframe {
+        height: 120px !important;
+    }
+    .bubble1, .bubble2, .bubble3, .bubble4, .bubble5 {
+        width: 32px !important;
+        height: 32px !important;
     }
 }
