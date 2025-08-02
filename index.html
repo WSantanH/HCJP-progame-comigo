@@ -470,28 +470,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const confirmCompra = document.getElementById('confirmCompra');
     const compraStatus = document.getElementById('compraStatus');
 
-    // Abre modal Pix ao clicar em comprar
-    if (btnLoja) {
-        btnLoja.onclick = function() {
-            pixModal.style.display = 'block';
-            compraStatus.style.display = 'none';
-            compraStatus.innerText = '';
-            document.getElementById('pixMsg').style.display = '';
-            // Esconde o botão de confirmar compra até que o código seja copiado
-            confirmCompra.style.display = 'none';
-            copyPix.style.display = '';
-        };
-    }
-
     // Copiar código Pix
     if (copyPix && pixCode) {
         copyPix.onclick = function() {
             pixCode.select();
             document.execCommand('copy');
             copyPix.innerText = "Copiado!";
-            // Mostra o botão de confirmar compra após copiar
+            // Mostra o botão de confirmar compra permanentemente após copiar
             confirmCompra.style.display = '';
+            localStorage.setItem('confirmCompraLiberado', 'true');
             setTimeout(() => { copyPix.innerText = "Copiar código"; }, 1500);
+        };
+    }
+
+    // Ao abrir o modal, verifica se o botão deve aparecer
+    if (btnLoja) {
+        btnLoja.onclick = function() {
+            pixModal.style.display = 'block';
+            compraStatus.style.display = 'none';
+            compraStatus.innerText = '';
+            document.getElementById('pixMsg').style.display = '';
+            // Verifica se já foi liberado
+            if (localStorage.getItem('confirmCompraLiberado') === 'true') {
+                confirmCompra.style.display = '';
+            } else {
+                confirmCompra.style.display = 'none';
+            }
+            copyPix.style.display = '';
         };
     }
 
