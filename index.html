@@ -477,6 +477,9 @@ document.addEventListener('DOMContentLoaded', function() {
             compraStatus.style.display = 'none';
             compraStatus.innerText = '';
             document.getElementById('pixMsg').style.display = '';
+            // Esconde o botão de confirmar compra até que o código seja copiado
+            confirmCompra.style.display = 'none';
+            copyPix.style.display = '';
         };
     }
 
@@ -486,6 +489,8 @@ document.addEventListener('DOMContentLoaded', function() {
             pixCode.select();
             document.execCommand('copy');
             copyPix.innerText = "Copiado!";
+            // Mostra o botão de confirmar compra após copiar
+            confirmCompra.style.display = '';
             setTimeout(() => { copyPix.innerText = "Copiar código"; }, 1500);
         };
     }
