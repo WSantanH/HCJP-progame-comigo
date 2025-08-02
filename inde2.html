@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <title>Java & Python VIP</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Fira Mono', monospace;
+            background: linear-gradient(135deg, #ffe082 0%, #2193b0 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 12s infinite linear;
+            z-index: 0;
+        }
+        .bubble.js {
+            background: #ffe082;
+            box-shadow: 0 0 24px #ffe08288;
+        }
+        .bubble.py {
+            background: #2193b0;
+            box-shadow: 0 0 24px #2193b088;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.7); opacity: 0.6; }
+            50% { opacity: 0.9; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0.3; }
+        }
+        header {
+            text-align: center;
+            padding: 32px 0 16px 0;
+            animation: slideDown 1s;
+            z-index: 1;
+            position: relative;
+        }
+        h1, h2, h3, h4, h5, h6, nav a, ul li, p, .code-demo, label, .linguagem ul li, .dicas, .video-box, .code-demo code, .code-demo pre, .videos, .footer, .main, .code-demo *, .dicas *, .video-box * {
+            color: #23272f !important;
+            font-weight: bold !important;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #23272f;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #ffe08288;
+            animation: typewriter 2s steps(20) 1s 1 normal both;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #23272f;
+        }
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            animation: fadeIn 1.5s;
+        }
+        nav a {
+            color: #23272f;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #2193b0;
+            text-shadow: 0 0 8px #ffe082;
+        }
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.7);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px #23272f22;
+            padding: 40px;
+            animation: fadeUp 1.2s;
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            color: #2193b0;
+            font-size: 2.2em;
+            margin-bottom: 24px;
+            animation: fadeIn 2s;
+        }
+        .linguagem {
+            margin-bottom: 48px;
+            animation: fadeUp 1.5s;
+        }
+        .linguagem h3 {
+            color: #23272f;
+            font-size: 1.7em;
+            margin-bottom: 16px;
+        }
+        .linguagem ul {
+            margin-left: 24px;
+            font-size: 1.15em;
+        }
+        .dicas {
+            margin-top: 18px;
+            margin-bottom: 24px;
+            font-size: 1.15em;
+            line-height: 1.7;
+            color: #23272f;
+            background: #ffe08244;
+            border-radius: 8px;
+            padding: 18px;
+        }
+        .code-demo,
+        .code-demo pre,
+        .code-demo code,
+        .dicas pre,
+        .linguagem pre,
+        .linguagem code,
+        pre,
+        code {
+            background: #f7f7f7 !important;
+            color: #23272f !important;
+            font-weight: bold !important;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1em;
+            overflow-x: auto;
+            box-sizing: border-box;
+        }
+        .videos {
+            margin-top: 24px;
+        }
+        .video-box {
+            margin-bottom: 18px;
+        }
+        .video-box iframe {
+            border-radius: 8px;
+            width: 100%;
+            max-width: 100%;
+            height: 315px;
+        }
+        section {
+            margin-bottom: 32px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        /* Responsividade */
+        @media (max-width: 900px) {
+            main {
+                max-width: 98vw;
+                padding: 12vw 2vw;
+            }
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5em; }
+            h2 { font-size: 1.2em; }
+            .linguagem h3 { font-size: 1.1em; }
+            main { padding: 8vw 2vw; }
+            .code-demo, pre, code { font-size: 0.95em; }
+            .video-box iframe { height: 180px; }
+            nav ul { gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bolhas animadas para fundo -->
+    <div class="bubble js" style="width:80px;height:80px;left:5vw;top:80vh;animation-delay:0s;"></div>
+    <div class="bubble py" style="width:120px;height:120px;left:70vw;top:90vh;animation-delay:2s;"></div>
+    <div class="bubble js" style="width:60px;height:60px;left:40vw;top:95vh;animation-delay:4s;"></div>
+    <div class="bubble py" style="width:100px;height:100px;left:20vw;top:85vh;animation-delay:6s;"></div>
+    <div class="bubble js" style="width:90px;height:90px;left:80vw;top:98vh;animation-delay:8s;"></div>
+    <header>
+        <h1>VIP Java & Python</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#java">Java</a></li>
+            <li><a href="#python">Python</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Bem-vindo ao conteúdo VIP de Java, Python e JavaScript!</h2>
+        <div class="linguagem" id="java">
+            <h3>Java</h3>
+            <ul>
+                <li>Orientação a Objetos</li>
+                <li>Desenvolvimento Desktop e Web</li>
+                <li>Frameworks populares: Spring, Hibernate</li>
+                <li>Exemplo de código:</li>
+            </ul>
+            <div class="code-demo">
+<pre><code>public class OlaMundo {
+    public static void main(String[] args) {
+        System.out.println("Olá, mundo Java!");
+    }
+}</code></pre>
+            </div>
+            <div class="dicas">
+                <b>Dicas para aprender Java:</b><br><br>
+                • Entenda bem os conceitos de orientação a objetos: classes, objetos, herança, polimorfismo e encapsulamento.<br>
+                • Pratique bastante com exercícios de lógica e algoritmos.<br>
+                • Use IDEs como IntelliJ ou Eclipse para facilitar o desenvolvimento.<br>
+                • Aprenda sobre tratamento de exceções para evitar erros inesperados.<br>
+                • Explore as bibliotecas padrão do Java, como Collections, Streams e IO.<br>
+                • Para web, estude Servlets, JSP e frameworks como Spring Boot.<br>
+                • Leia e escreva códigos comentados para facilitar a manutenção.<br>
+                • Participe de fóruns e comunidades como Stack Overflow e grupos no Telegram.<br>
+                • Faça projetos práticos, como sistemas de cadastro, calculadoras, ou APIs REST.<br>
+                • Sempre revise e refatore seu código para deixá-lo mais limpo e eficiente.<br>
+            </div>
+            <div class="videos">
+                <h4 style="margin-top:24px;">Vídeo Aulas Java</h4>
+                <div class="video-box">
+                    <b>Orientação a Objetos</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/97A_Cyyh-eU?cc_lang_pref=pt&cc_load_policy=1" title="Java Orientação a Objetos - Código Fonte TV" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-box">
+                    <b>Java para Web (Spring Boot)</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/j_F0cz0em04?cc_lang_pref=pt&cc_load_policy=1" title="Spring Boot em Português" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-box">
+                    <b>Tratamento de Exceções</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/GmbK-O3v3Gg?cc_lang_pref=pt&cc_load_policy=1" title="Tratamento de Exceções em Java - CFBCursos" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="linguagem" id="python">
+            <h3>Python</h3>
+            <ul>
+                <li>Sintaxe simples e poderosa</li>
+                <li>Automação, Web, Data Science</li>
+                <li>Frameworks populares: Django, Flask</li>
+                <li>Exemplo de código:</li>
+            </ul>
+            <div class="code-demo">
+<pre><code>def ola_mundo():
+    print("Olá, mundo Python!")
+
+ola_mundo()
+</code></pre>
+            </div>
+            <div class="dicas">
+                <b>Mais exemplos de código Python:</b><br><br>
+                <b>Variáveis e tipos:</b>
+                <pre><code>x = 10
+nome = "Maria"
+pi = 3.14
+</code></pre>
+                <b>Estruturas de decisão:</b>
+                <pre><code>if x > 5:
+    print("x é maior que 5")
+else:
+    print("x não é maior que 5")
+</code></pre>
+                <b>Laços de repetição:</b>
+                <pre><code>for i in range(5):
+    print(i)
+</code></pre>
+                <b>Funções:</b>
+                <pre><code>def soma(a, b):
+    return a + b
+
+print(soma(2, 3))
+</code></pre>
+                <b>Listas:</b>
+                <pre><code>lista = [1, 2, 3, 4]
+for item in lista:
+    print(item)
+</code></pre>
+                <b>Dicionários:</b>
+                <pre><code>dados = {"nome": "Ana", "idade": 22}
+print(dados["nome"])
+</code></pre>
+                <b>Automação de arquivos:</b>
+                <pre><code>with open("arquivo.txt", "w") as f:
+    f.write("Olá, mundo!")
+</code></pre>
+                <b>Web com Flask:</b>
+                <pre><code>from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Olá, Flask!"
+</code></pre>
+            </div>
+            <div class="videos">
+                <h4 style="margin-top:24px;">Vídeo Aulas Python</h4>
+                <div class="video-box">
+                    <b>Python Básico</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/S9uPNppGsGo?cc_lang_pref=pt&cc_load_policy=1" title="Python Básico" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-box">
+                    <b>Automação com Python</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/44wFWFHy-iA?cc_lang_pref=pt&cc_load_policy=1" title="Automação com Python" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-box">
+                    <b>Python para Web (Flask)</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/WnaRrfqq5uw?cc_lang_pref=pt&cc_load_policy=1" title="Python para Web (Flask)" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="linguagem" id="javascript">
+            <h3>JavaScript</h3>
+            <ul>
+                <li>Manipulação de DOM</li>
+                <li>Eventos e funções</li>
+                <li>Frameworks populares: React, Vue, Node.js</li>
+                <li>Exemplo de código:</li>
+            </ul>
+            <div class="code-demo">
+<pre><code>function olaMundo() {
+    alert("Olá, mundo JavaScript!");
+}
+olaMundo();
+</code></pre>
+            </div>
+            <div class="dicas">
+                <b>Mais exemplos de código JavaScript:</b><br><br>
+                <b>Variáveis:</b>
+                <pre><code>let x = 10;
+const nome = "Maria";
+var pi = 3.14;
+</code></pre>
+                <b>Estruturas de decisão:</b>
+                <pre><code>if (x > 5) {
+    console.log("x é maior que 5");
+} else {
+    console.log("x não é maior que 5");
+}
+</code></pre>
+                <b>Laços de repetição:</b>
+                <pre><code>for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+</code></pre>
+                <b>Funções:</b>
+                <pre><code>function soma(a, b) {
+    return a + b;
+}
+console.log(soma(2, 3));
+</code></pre>
+                <b>Arrays:</b>
+                <pre><code>let lista = [1, 2, 3, 4];
+lista.forEach(function(item) {
+    console.log(item);
+});
+</code></pre>
+                <b>Objetos:</b>
+                <pre><code>let dados = {nome: "Ana", idade: 22};
+console.log(dados.nome);
+</code></pre>
+                <b>Manipulação de DOM:</b>
+                <pre><code>document.getElementById("meuElemento").innerText = "Novo texto";
+</code></pre>
+                <b>Eventos:</b>
+                <pre><code>document.getElementById("botao").onclick = function() {
+    alert("Botão clicado!");
+};
+</code></pre>
+                <b>Função Arrow:</b>
+                <pre><code>const soma = (a, b) => a + b;
+console.log(soma(2, 3));
+</code></pre>
+            </div>
+            <div class="videos">
+                <h4 style="margin-top:24px;">Vídeo Aulas JavaScript</h4>
+                <div class="video-box">
+                    <b>JavaScript Básico</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/Ptbk2af68e8?cc_lang_pref=pt&cc_load_policy=1" title="JavaScript Básico" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-box">
+                    <b>Manipulação de DOM</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/0mYq5LrQN1s?cc_lang_pref=pt&cc_load_policy=1" title="Manipulação de DOM JavaScript" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-box">
+                    <b>JavaScript para Web (React)</b>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/GykTLqODQuU?cc_lang_pref=pt&cc_load_policy=1" title="React JS em Português" frameborder="0" allowfullscreen></iframe>                
+                </div>
+            </div>
+        </div>
+
+        <!-- NOVO BLOCO: Projetos Práticos -->
+        <section class="projetos">
+            <h3>Projetos Práticos para Treinar</h3>
+            <ul>
+                <li><b>Python:</b> Calculadora, sistema de cadastro, automação de planilhas, web scraping, API REST com Flask.</li>
+                <li><b>JavaScript:</b> Lista de tarefas, calculadora online, jogo da velha, consumo de API, página interativa com DOM.</li>
+                <li><b>Java:</b> Sistema de cadastro desktop, API REST com Spring Boot, CRUD com banco de dados, sistema de login.</li>
+            </ul>
+            <p>Esses projetos ajudam a fixar o conteúdo e podem ser usados no seu portfólio!</p>
+        </section>
+
+        <!-- NOVO BLOCO: Ferramentas e IDEs -->
+        <section class="ferramentas">
+            <h3>Ferramentas e IDEs Recomendadas</h3>
+            <ul>
+                <li><b>Python:</b> VS Code, PyCharm, Jupyter Notebook.</li>
+                <li><b>JavaScript:</b> VS Code, WebStorm, navegadores com DevTools.</li>
+                <li><b>Java:</b> IntelliJ IDEA, Eclipse, NetBeans.</li>
+            </ul>
+            <p>Utilize sempre um editor moderno para facilitar o desenvolvimento e depuração dos seus códigos.</p>
+        </section>
+
+        <!-- NOVO BLOCO: Comunidades e Recursos -->
+        <section class="comunidades">
+            <h3>Comunidades e Recursos Gratuitos</h3>
+            <ul>
+                <li><b>Python:</b> <a href="https://python.org" target="_blank">python.org</a>, <a href="https://pypi.org" target="_blank">PyPI</a>, <a href="https://www.youtube.com/@CursoemVideo" target="_blank">Curso em Vídeo</a></li>
+                <li><b>JavaScript:</b> <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript" target="_blank">MDN Web Docs</a>, <a href="https://www.youtube.com/@cfbcursos" target="_blank">CFBCursos</a></li>
+                <li><b>Java:</b> <a href="https://www.oracle.com/br/java/" target="_blank">Oracle Java</a>, <a href="https://www.youtube.com/@codigofontetv" target="_blank">Código Fonte TV</a></li>
+                <li><b>Geral:</b> <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a>, <a href="https://github.com/" target="_blank">GitHub</a></li>
+            </ul>
+            <p>Participe de fóruns, grupos e canais para tirar dúvidas, compartilhar conhecimento e fazer networking!</p>
+        </section>
+
+        <!-- NOVO BLOCO: Dicas de Carreira -->
+        <section class="carreira">
+            <h3>Dicas para sua Carreira em Tecnologia</h3>
+            <ul>
+                <li>Monte um portfólio com seus projetos.</li>
+                <li>Aprenda sobre controle de versão com Git e GitHub.</li>
+                <li>Faça cursos online e obtenha certificados.</li>
+                <li>Participe de eventos, hackathons e meetups.</li>
+                <li>Pratique inglês técnico para acessar mais conteúdos.</li>
+                <li>Busque estágio ou trabalho voluntário para ganhar experiência.</li>
+            </ul>
+            <p>O mercado de tecnologia está sempre em alta. Invista em aprendizado contínuo!</p>
+        </section>
+
+        <!-- NOVO BLOCO: Glossário -->
+        <section class="glossario">
+            <h3>Glossário Rápido</h3>
+            <ul>
+                <li><b>API:</b> Interface para integração entre sistemas.</li>
+                <li><b>Framework:</b> Conjunto de ferramentas para facilitar o desenvolvimento.</li>
+                <li><b>CRUD:</b> Operações de Criar, Ler, Atualizar e Deletar dados.</li>
+                <li><b>IDE:</b> Ambiente de desenvolvimento integrado.</li>
+                <li><b>Deploy:</b> Publicar um sistema na internet.</li>
+                <li><b>Front-end:</b> Parte visual do sistema (JavaScript).</li>
+                <li><b>Back-end:</b> Parte lógica e de dados (Python, Java).</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 VIP Java & Python. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

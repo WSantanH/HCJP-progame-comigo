@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Fundamentos e CSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+    <style>
+        /* Melhor responsividade para modal e botões */
+        @media (max-width: 600px) {
+            #pixModal > div {
+                width: 98vw !important;
+                max-width: 98vw !important;
+                padding: 16px 6px !important;
+            }
+            #pixCode {
+                font-size: 0.95em !important;
+                height: 60px !important;
+            }
+            #copyPix, #pixModal button {
+                font-size: 1em !important;
+                padding: 8px !important;
+            }
+        }
+        /* Garantir que o modal fique centralizado em todos dispositivos */
+        #pixModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        #pixModal.show {
+            display: flex !important;
+        }
+        /* Corrige textarea para todos dispositivos */
+        #pixCode {
+            width: 100%;
+            min-height: 60px;
+            font-size: 1em;
+            border-radius: 8px;
+            padding: 8px;
+            resize: none;
+            box-sizing: border-box;
+        }
+        /* Botões responsivos */
+        button {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        /* Imagens responsivas */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Tabelas responsivas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+        th, td {
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+        }
+        /* Corrige fonte para todos dispositivos */
+        body {
+            font-family: 'Fira Mono', monospace;
+            background: #f7f7f7;
+            margin: 0;
+            color: #23272f;
+        }
+    </style>
+</head>
+<body>
+    <div class="code-bg"></div>
+    <div id="info-numero">
+        Para mais informações disque <b>75-9716-3401</b>.
+    </div>
+    <div style="position:fixed;top:60px;left:16px;z-index:1100;">
+        <button id="btnLoja">
+            Loja VIP - Pacote Python & JavaScript (R$ 10,00)
+        </button>
+    </div>
+
+    <div class="perfil-container">
+        <div class="perfil-foto-bg">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de perfil" class="perfil-foto" id="fotoPerfil">
+            <span class="icon-code">&#60;/&#62;</span>
+        </div>
+        <input type="file" id="inputFoto" accept="image/*" style="display:none" />
+        <button id="trocarFotoBtn">Trocar foto</button>
+        <button class="logout-btn" id="logoutBtn" onclick="deslogar()">Deslogar</button>
+    </div>
+
+    <div class="glass">
+        <h1 class="typewriter">Fundamentos do HTML</h1>
+        <h3 class="typewriter" style="animation-delay:2.5s;">Aprendam comigo e cresçam juntos!</h3>
+        <button onclick="mostrarCadastro()">Cadastro</button>
+        <button onclick="mostrarLogin()">Login</button>
+        <div id="cadastro" class="glass" style="display:none;">
+            <h2>Cadastro</h2>
+            <form onsubmit="return cadastrar(event)">
+                <input type="text" placeholder="Nome" required><br>
+                <input type="email" placeholder="Email" required><br>
+                <input type="password" placeholder="Senha" required><br>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+        <div id="login" class="glass" style="display:none;">
+            <h2>Login</h2>
+            <form id="formLogin" onsubmit="return entrar(event)">
+                <input type="email" placeholder="Email" required><br>
+                <input type="password" placeholder="Senha" required><br>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="glass">
+        <p>Como visto acima temos títulos e subtítulos, eles são usados com as tags h1 até h6.</p>
+        <br />
+        <p>Agora temos por fim a tag br, ela é responsável pelo espaçamento.</p>
+        <hr />
+        <p>Agora temos a tag hr, que serve para criar uma linha horizontal.</p>
+        <hr>
+        <!-- este é um comentário -->
+        <p>Agora temos o comentário, ele é utilizado para adicionar notas.</p>
+        <!-- 2 - atributos -->
+        <hr>
+        <a href="https://www.google.com">Acesse o Google</a>
+        <!-- 3 - atributos -->
+        <p>A tag href é usada para por links no seu site.</p>
+        <!-- 4 - abrir aba com link -->
+        <a href="http://www.google.com" target="_blank">Abrir Google em nova aba</a>
+        <!-- 5 - inserir imagem -->
+        <img src="img/stable-diffusion-imagem.jpg" alt="" style="width:200px; border-radius:8px; margin:10px 0;">
+        <p>Como você pode ver usamos a tag img, que é usada para adicionar imagens ao seu site.</p>
+        <!-- 6 - atributo alt -->
+        <img src="img/images.jfif" alt="flores" style="width:200px; border-radius:8px; margin:10px 0;">
+        <p>Como podemos ver, é possível usar o atributo alt na imagem, que serve como leitor do google.</p>
+        <!-- 7 - listas não ordenadas-->
+        <ul>
+            <li>carros</li>
+            <li>motos</li>
+        </ul>
+        <p>Como podemos ver, podemos usar as listas não ordenadas para listar e deixar em destaque.</p>
+        <!-- 8 - listas ordenadas -->
+        <ol>
+            <li>listas ordenadas</li>
+        </ol>
+        <p>Como podemos ver, as listas ordenadas são usadas para colocar não um ponto ou seja tópico, mas sim em números.</p>
+        <!-- 9 - tabelas -->
+        <table>
+            <tr>
+                <th>ID:</th>
+                <th>Aulas:</th>
+                <th>Contato:</th>  
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Wayllahn</td>
+                <td>Email</td>
+            </tr>
+        </table>
+        <p>Como você pode ver é possível utilizar a tag table, que serve para tabela e também th e td.</p>
+        <!-- 10 - tag div -->
+        <div>
+            <h2>Div, o que é?</h2>
+        </div>
+        <p>A tag div é usada para dividir.</p>
+        <!-- 12 - div -->
+        <div>
+            <h2>A tag é muito utilizada para estruturar visualmente o conteúdo das páginas web.</h2>
+            <p>A tag no HTML é usada para criar divisões ou seções em uma página. Ela não tem significado semântico, mas serve para agrupar elementos e facilitar a organização do layout, principalmente quando você quer aplicar estilos com CSS ou manipular partes do site com JavaScript.</p>
+            <a href="https://www.w3schools.com/html/html_div.asp" target="_blank">Para mais informações sobre, acesse o site.</a> 
+            
+            <h1>Maneiras de utilizar e/ou adicionar css</h1>
+            <p>Temos maneiras de utilizar o css ao html.</p>
+            <ol id="lista" class="lista-ordenada"></ol>
+            <li>Pelo inline: quando os estilos são adicionados por um atributo;</li> 
+            <li>Pelo internal: quando o CSS é adicionado na tag head;</li>
+            <li>Pelo external: quado o css é adicionado através de um arquivo externo, e depois importado no HTMl;</li>
+            <H1>Qual vamos escolher?</H1>
+            <p>Vamos optar  sempre pelo external CSS, quando houver a opção.</p>
+            <h1>A anatomia do CSS</h1>
+            <p>Com CSS aplicando CSS a um elemento. Primeiramente devemos selecionar o elemento, isso pode ser feito através da tag do elemento. Depois precisamos colocar as propriedades e os valores, se quisermos mudar a cor de algo utilizamos: color: red, nome da propriedade, dois pontos, valor, ponto e vírgula.</p>
+            <h1>Inline CSS</h1>
+            <p>O inline CSS é quando você aplica estilos diretamente em um elemento HTML usando o atributo style, mas pode ser utilizado sem selecionar o elemento, pois é uma tributo diretamente inserido no mesmo.</p>
+            <p>Ele nos permite:</p> 
+            <li>Aplicar estilos específicos a um único elemento;</li>
+            <li>Sobrepor estilos definidos em folhas de estilo externas ou internas;</li>
+            <li>Ser útil para testes rápidos ou ajustes pontuais;</li>
+            <p>Porém, o inline CSS não é recomendado para uso extensivo, pois pode tornar o código HTML desorganizado e difícil de manter. É melhor usar folhas de estilo externas ou internas para aplicar estilos de forma consistente em todo o site.</p>
+            <h1>Internal CSS</h1>
+            <p>O CSS interno é uma técnica melhor que o inline, vamos colocar todos os estilos na tag head;</p>
+            <li>As regras precisam também estar entre a tag style;</li>
+            <li>E através desta maneira, é necessário selecionar o elmento alvo: p{ color: red;}
+            <h1>External CSS</h1>
+            <p>Para adicionar CSS com esta técnica precisamos criar um arquivo . css;</p>
+            <li>Geralmente eles ficam numa pasta chamada css;</li>
+            <li>E nós o importamos através da tag link;</li>
+            <li>O link deve estar dentro da tag head;</li>
+            <li>O link deve ter o atributo rel com o valor stylesheet e as regras que estão no arquivo são aplicadas no HTML.</li>
+            <h1>Múltiplos arquivos CSS</h1>
+            <p>É possível ter múltiplos arquivos CSS em um projeto. Para isso, basta criar vários arquivos .css e importá-los na tag head do HTML.</p>
+            <p>Por exemplo, você pode ter um arquivo style.css para estilos gerais, outro chamado titles.css para estilos de títulos, e assim por diante.</p>
+            <p>Isso ajuda a organizar melhor o código e facilita a manutenção, especialmente em projetos
+            <h1>Comentários no CSS</h1>
+            <li>Comentários do CSS são como os de HTML, utilizamos para descrever algo no código;</li>
+            <li>Caso o código precise de explicações adicionais, podemos usar comentários para esclarecer;</li>
+            <li>A sintaxe é: /* algum comentário */, isso caso o código seja inspencionado, aí os comentários serão exibidos</li>
+            <h1>Classes e ids</h1>
+            <li>Classes e ids são seletores que nos permitem aplicar estilos a elementos específicos;</li>
+            <li>Um id deve ser único dentro de uma página, enquanto várias classes podem ser aplicadas a um ou mais elementos;</li>
+            <li>A sintaxe para usar um id é: #meuId { color: red; }, e para uma classe: .minhaClasse { color: blue; };</li>
+            <p>Classes e ids são fundamentais para aplicar estilos específicos a elementos HTML. Eles nos permitem personalizar a aparência de partes específicas do site, tornando o design mais flexível e organizado.</p>
+            <h1>Classes</h1>
+            <p>As classes são usadas para agrupar elementos que compartilham estilos semelhantes. Você pode aplicar a mesma classe a vários elementos, facilitando a manutenção e a consistência do design.</p>
+            <p>Para usar uma classe, você a define no CSS com um ponto (.) antes do nome da classe. Por exemplo:</p>
+            <pre><code>.minhaClasse {
+                color: blue;
+            }</code></pre>
+            <p>Em seguida, você aplica a classe aos elementos HTML usando o atributo class:</p>
+            <pre><code>&lt;div class="minhaClasse"&gt;Este é um exemplo de div com classe.&lt;/div&gt;</code></pre>
+            <p>Você pode aplicar várias classes a um único elemento, separando os nomes por espaços:</p>
+            <pre><code>&lt;div class="classe1 classe2"&gt;Este é um exemplo de div com múltiplas classes.&lt;/div&gt;</code></pre>
+            <h1>Ids</h1>
+    color: blue;
+        </div>
+    </div>
+
+    <div id="pixModal">
+        <div>
+            <h3 style="margin-top:0;">Pix Copia e Cola</h3>
+            <p id="pixMsg" style="color:#ffe082;font-size:1em;margin-bottom:8px;">
+                Para comprar, copie o código abaixo, pague via Pix Copia e Cola no seu banco e clique em "Confirmar compra".
+            </p>
+            <textarea id="pixCode" readonly>
+00020101021126580014br.gov.bcb.pix0136ac2d3760-ff82-406f-ad66-420fcd0872df520400005303986540510.005802BR5921WAYLLAHN S DOS SANTOS6006BANZAE62070503***6304F1CF
+</textarea>
+            <button id="copyPix">Copiar código</button>
+            <button id="confirmCompra">Confirmar compra</button>
+            <div id="compraStatus" style="margin-top:10px;font-size:1em;color:#ffe082;display:none;"></div>
+            <button onclick="document.getElementById('pixModal').classList.remove('show')" style="margin-top:8px;">Fechar</button>
+            <button id="btnEntrarSite" style="margin-top:12px;display:none;">Entre no site Java e Python</button>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnLoja = document.getElementById('btnLoja');
+        const pixModal = document.getElementById('pixModal');
+        const copyPix = document.getElementById('copyPix');
+        const pixCode = document.getElementById('pixCode');
+        const confirmCompra = document.getElementById('confirmCompra');
+        const btnEntrarSite = document.getElementById('btnEntrarSite');
+        const compraStatus = document.getElementById('compraStatus');
+        const btnCadastro = document.querySelector('button[onclick="mostrarCadastro()"]');
+        const btnLogin = document.querySelector('button[onclick="mostrarLogin()"]');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Abre modal Pix ao clicar em comprar
+        if (btnLoja) {
+            btnLoja.onclick = function() {
+                pixModal.classList.add('show');
+                btnEntrarSite.style.display = 'none';
+                confirmCompra.style.display = '';
+                compraStatus.style.display = 'none';
+                compraStatus.innerText = '';
+                document.getElementById('pixMsg').style.display = '';
+            };
+        }
+
+        // Copiar código Pix
+        if (copyPix && pixCode) {
+            copyPix.onclick = function() {
+                pixCode.select();
+                document.execCommand('copy');
+                copyPix.innerText = "Copiado!";
+                setTimeout(() => { copyPix.innerText = "Copiar código"; }, 1500);
+            };
+        }
+
+        // Confirmar compra (simulação de verificação)
+        if (confirmCompra) {
+            confirmCompra.onclick = function() {
+                let pagou = confirm("Você já realizou o pagamento via Pix Copia e Cola?");
+                if (pagou) {
+                    localStorage.setItem('acessoComprado', 'true');
+                    confirmCompra.style.display = 'none';
+                    btnEntrarSite.style.display = '';
+                    compraStatus.style.display = 'block';
+                    compraStatus.innerText = "Compra concluída! Agora você pode acessar o site Java e Python.";
+                    document.getElementById('pixMsg').style.display = 'none';
+                } else {
+                    compraStatus.style.display = 'block';
+                    compraStatus.innerText = "Não foi possível concluir a compra. Realize o pagamento Pix antes de confirmar!";
+                }
+            };
+        }
+
+        // Botão para entrar no site Java e Python
+        if (btnEntrarSite) {
+            btnEntrarSite.onclick = function() {
+                window.location.href = "inde2.html";
+            };
+        }
+
+        // Bloqueia acesso se não comprou
+        if (window.location.pathname.endsWith('inde2.html')) {
+            if (localStorage.getItem('acessoComprado') !== 'true') {
+                alert('Você precisa comprar para acessar esta página!');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Atualiza foto do perfil ao carregar a página
+        const fotoPerfil = document.getElementById('fotoPerfil');
+        const email = localStorage.getItem('usuarioLogado');
+        let foto = "https://randomuser.me/api/portraits/men/32.jpg";
+        if (email) {
+            const fotoSalva = localStorage.getItem('fotoPerfil_' + email);
+            if (fotoSalva) {
+                foto = fotoSalva;
+            }
+        }
+        if (fotoPerfil) fotoPerfil.src = foto;
+
+        // Esconde/mostra botões de login/cadastro conforme login
+        function esconderBotoes() {
+            if (btnCadastro) btnCadastro.style.display = 'none';
+            if (btnLogin) btnLogin.style.display = 'none';
+        }
+        function mostrarBotoes() {
+            if (btnCadastro) btnCadastro.style.display = '';
+            if (btnLogin) btnLogin.style.display = '';
+        }
+
+        // Verifica login ao carregar
+        if (localStorage.getItem('usuarioLogado')) {
+            esconderBotoes();
+        } else {
+            mostrarBotoes();
+        }
+
+        // Função de login
+        window.entrar = function(event) {
+            event.preventDefault();
+            const emailInput = event.target.querySelector('input[type="email"]');
+            if (emailInput) {
+                localStorage.setItem('usuarioLogado', emailInput.value);
+                esconderBotoes();
+                document.getElementById('login').style.display = 'none';
+            }
+            return false;
+        };
+
+        // Função de cadastro
+        window.cadastrar = function(event) {
+            event.preventDefault();
+            const emailInput = event.target.querySelector('input[type="email"]');
+            if (emailInput) {
+                localStorage.setItem('usuarioLogado', emailInput.value);
+                esconderBotoes();
+                document.getElementById('cadastro').style.display = 'none';
+            }
+            return false;
+        };
+
+        // Função de deslogar
+        window.deslogar = function() {
+            localStorage.removeItem('usuarioLogado');
+            mostrarBotoes();
+        };
+
+        // Botão deslogar
+        if (logoutBtn) {
+            logoutBtn.onclick = window.deslogar;
+        }
+    });
+    </script>
+</body>
+</html>
