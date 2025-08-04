@@ -1,225 +1,309 @@
-/* Fundo azul escuro estilo programação */
+/* Estilos base do site de curso web development */
 body {
     font-family: 'Fira Mono', monospace;
     background: linear-gradient(135deg, #23272f 0%, #2193b0 100%);
     margin: 0;
     color: #e0e0e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
-/* Caixa principal estilo terminal/código */
 .glass {
-    background: #176fa1;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px #000a;
-    padding: 32px;
-    margin: 32px auto;
-    max-width: 900px;
-    color: #fff;
-    text-align: left;
-    border: 1px solid #2193b0;
-}
-
-/* Títulos com cor de destaque */
-h1, h2, h3, h4, h5, h6 {
-    color: #ffe082;
-    font-family: 'Fira Mono', monospace;
-    font-weight: bold;
-    text-shadow: 0 2px 8px #2193b088;
-}
-
-/* Código destacado */
-pre, code {
-    background: #23272f;
-    color: #ffe082;
-    font-family: 'Fira Mono', monospace;
-    font-size: 1em;
-    border-radius: 8px;
-    padding: 12px;
-    margin: 12px 0;
-    overflow-x: auto;
-    box-shadow: 0 2px 8px #2193b044;
-}
-
-/* Tabela estilo terminal */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #23272f;
-    color: #ffe082;
-    margin: 16px 0;
-}
-th, td {
-    border: 1px solid #2193b0;
-    padding: 8px;
-    text-align: left;
-}
-th {
-    background: #2193b0;
-    color: #fff;
-}
-
-/* Botões estilo terminal */
-button {
-    background: #2193b0;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 24px;
-    font-size: 1em;
-    font-family: 'Fira Mono', monospace;
-    cursor: pointer;
-    margin: 8px 0;
-    transition: background 0.3s;
-}
-button:hover {
-    background: #176fa1;
-}
-
-/* Imagens responsivas */
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px #23272f44;
-}
-
-/* Bolhas animadas de fundo */
-.bubble {
-    position: fixed;
-    border-radius: 50%;
-    opacity: 0.18;
-    z-index: 0;
-    animation: floatBubble 16s linear infinite;
-    pointer-events: none;
-}
-.bubble1 { background: #2193b0; width: 120px; height: 120px; left: 5vw; top: 80vh; animation-delay: 0s;}
-.bubble2 { background: #176fa1; width: 80px; height: 80px; left: 70vw; top: 90vh; animation-delay: 3s;}
-.bubble3 { background: #ffe082; width: 60px; height: 60px; left: 40vw; top: 95vh; animation-delay: 6s;}
-.bubble4 { background: #23272f; width: 100px; height: 100px; left: 20vw; top: 85vh; animation-delay: 9s;}
-.bubble5 { background: #fff; width: 90px; height: 90px; left: 80vw; top: 98vh; animation-delay: 12s;}
-
-@keyframes floatBubble {
-    0% { transform: translateY(0) scale(0.8); opacity: 0.18; }
-    50% { opacity: 0.25; }
-    100% { transform: translateY(-100vh) scale(1.2); opacity: 0.08; }
-}
-
-/* Perfil estilo terminal */
-.perfil-container {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 24px 0;
-}
-.perfil-foto-bg {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 3vw 2vw;
+    margin: 16px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     position: relative;
-    display: inline-block;
+    z-index: 1;
 }
-.perfil-foto {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #2193b0;
-    box-shadow: 0 2px 8px #23272f44;
-    background: #fff;
-    display: block;
-}
-.icon-code {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: #2193b0;
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-size: 0.9em;
-    border: 1px solid #fff;
-}
+
+/* Elementos fixos padrão */
 .perfil-foto-topo {
     position: fixed;
     top: 16px;
     right: 16px;
-    z-index: 1200;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: transparent;
+    z-index: 1000;
+    background: rgba(35, 39, 47, 0.9);
+    border-radius: 15px;
+    padding: 12px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsivo */
+.perfil-foto {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#trocarFotoBtn, #logoutBtn {
+    background: #2193b0;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-top: 8px;
+    width: 80px;
+}
+
+#btnLoja {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    background: #2193b0;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#info-numero {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 1000;
+    background: rgba(35, 39, 47, 0.9);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+#pixModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    background: rgba(35, 39, 47, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 350px;
+    width: 85%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* MEDIA QUERIES MOBILE - OTIMIZADO */
+
+/* Tablets e telas médias */
 @media (max-width: 900px) {
     .glass {
-        max-width: 98vw;
-        margin: 16px 1vw;
-        padding: 4vw 2vw;
+        padding: 20px 16px;
+        margin: 12px 6px;
     }
+}
+
+/* Mobile padrão */
+@media (max-width: 768px) {
+    /* Compensar elementos fixos */
+    body {
+        padding-top: 70px !important;
+        padding-bottom: 90px !important;
+    }
+    
+    /* Menu de perfil mais compacto */
     .perfil-foto-topo {
         top: 8px;
         right: 8px;
+        padding: 8px;
     }
+    
     .perfil-foto {
-        width: 32px;
-        height: 32px;
+        width: 35px;
+        height: 35px;
     }
+    
     #trocarFotoBtn, #logoutBtn {
-        font-size: 0.85em;
-        max-width: 90px;
+        font-size: 0.7em;
         padding: 4px 8px;
+        width: 60px;
     }
-    .bubble1, .bubble2, .bubble3, .bubble4, .bubble5 {
-        width: 60px !important;
-        height: 60px !important;
+    
+    /* Botão da loja menos intrusivo */
+    #btnLoja {
+        top: 8px;
+        left: 8px;
+        padding: 8px 12px;
+        font-size: 0.8em;
+        max-width: 140px;
     }
+    
+    /* Info número mais discreto */
+    #info-numero {
+        bottom: 8px;
+        left: 8px;
+        right: 8px;
+        padding: 10px;
+        font-size: 0.85em;
+    }
+    
+    /* Conteúdo principal */
+    .glass {
+        padding: 16px 12px;
+        margin: 16px 8px;
+    }
+    
+    /* Modal PIX responsivo */
     #pixModal {
-        left: 0 !important;
-        right: 0 !important;
-        max-width: 98vw !important;
-        width: 98vw !important;
-        padding: 12px !important;
-        font-size: 0.95em;
+        max-width: 300px;
+        width: 90%;
+        padding: 16px;
+        font-size: 0.9em;
     }
-    #pixCode {
-        font-size: 0.95em;
-        height: 60px !important;
-    }
+    
+    /* Vídeos responsivos */
     .glass iframe {
-        height: 180px !important;
+        height: 200px !important;
     }
-    .glass h2, .glass h4 {
-        font-size: 1.1em;
+    
+    /* Melhorar legibilidade */
+    .glass p, .glass li {
+        line-height: 1.6;
+        margin-bottom: 16px;
     }
-    .glass table, .glass th, .glass td {
-        font-size: 0.95em;
+    
+    /* Botões mais acessíveis */
+    .glass button {
+        padding: 12px 16px;
+        margin: 8px 4px;
+        font-size: 0.9em;
+        min-height: 44px;
+    }
+    
+    /* Inputs responsivos */
+    .glass input {
+        padding: 12px;
+        margin: 8px 0;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 16px; /* Evita zoom no iOS */
     }
 }
-@media (max-width: 600px) {
-    .glass {
-        padding: 2vw 1vw;
-        margin: 8px 0;
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+    /* Compensar elementos fixos menores */
+    body {
+        padding-top: 60px !important;
+        padding-bottom: 70px !important;
     }
+    
+    /* Elementos fixos ainda mais compactos */
     .perfil-foto-topo {
         top: 4px;
         right: 4px;
+        padding: 6px;
     }
+    
     .perfil-foto {
-        width: 24px;
-        height: 24px;
+        width: 30px;
+        height: 30px;
     }
+    
     #trocarFotoBtn, #logoutBtn {
+        font-size: 0.65em;
+        padding: 3px 6px;
+        width: 50px;
+    }
+    
+    #btnLoja {
+        top: 4px;
+        left: 4px;
+        padding: 6px 10px;
         font-size: 0.75em;
-        max-width: 70px;
-        padding: 2px 4px;
+        max-width: 120px;
     }
+    
+    #info-numero {
+        bottom: 4px;
+        left: 4px;
+        right: 4px;
+        padding: 8px;
+        font-size: 0.8em;
+    }
+    
+    /* Conteúdo principal compacto */
+    .glass {
+        padding: 12px 8px;
+        margin: 8px 4px;
+    }
+    
+    /* Modal PIX menor */
     #pixModal {
-        padding: 6px !important;
-        font-size: 0.9em;
+        max-width: 280px;
+        width: 95%;
+        padding: 12px;
+        font-size: 0.85em;
     }
+    
+    /* Vídeos menores */
     .glass iframe {
-        height: 120px !important;
+        height: 160px !important;
     }
-    .bubble1, .bubble2, .bubble3, .bubble4, .bubble5 {
-        width: 32px !important;
-        height: 32px !important;
+    
+    /* Texto otimizado */
+    .glass p, .glass li {
+        font-size: 0.95em;
+        line-height: 1.5;
+    }
+    
+    /* Botões de toque otimizados */
+    .glass button {
+        padding: 14px 12px;
+        margin: 6px 2px;
+        font-size: 0.85em;
+        min-height: 48px;
+    }
+}
+
+/* Dispositivos touch - otimizações extras */
+@media screen and (max-width: 768px) and (hover: none) {
+    /* Remover efeitos hover desnecessários */
+    .glass button:hover {
+        transform: none;
+    }
+    
+    /* Área de toque adequada */
+    .perfil-foto-topo, #btnLoja {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    /* Evitar seleção acidental */
+    .perfil-foto-topo, #btnLoja, #info-numero {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Scroll suave */
+    html {
+        scroll-padding-top: 80px;
+    }
+    
+    /* Títulos com espaçamento adequado */
+    .glass h1, .glass h2, .glass h3 {
+        scroll-margin-top: 80px;
+        padding-top: 15px;
     }
 }
